@@ -1,0 +1,35 @@
+{
+    "data": [
+    {
+        "id": 1,
+        "name": "Create proper ToDo App",
+        "description": "And don't forget to include MUI components!",
+        "completed": true,
+        "data": null,
+        "pictureId": null,
+        "tagId": 0
+    },
+    {
+        "id": 2,
+        "name": "Do some mindfulness meditation practice",
+        "description": "Lorem ipsum and so on...",
+        "completed": false,
+        "data": null,
+        "pictureId": null,
+        "tagId": 1
+    },
+    {
+        "id": 3,
+        "name": "Vacuum the room",
+        "description": null,
+        "completed": false,
+        "data": null,
+        "pictureId": null,
+        "tagId": 2
+    }
+]
+}
+
+
+
+
