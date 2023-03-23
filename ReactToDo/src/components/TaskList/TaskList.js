@@ -1,30 +1,15 @@
 import { Grid, List, ListItem, IconButton, ListItemAvatar, Avatar, ListItemText  } from '@mui/material';
 import { Folder, Delete } from '@mui/icons-material';
 
+import TaskItem from '../TaskItem/TaskItem';
+
 const TaskList = ({data}) => {
 
-    const itemsList = data.map(item => {
-        return (
-            <List>
-                <ListItem
-                    secondaryAction={
-                    <IconButton edge="end" aria-label="delete">
-                        <Delete />
-                    </IconButton>
-                    }
-                >
-                    <ListItemAvatar>
-                    <Avatar>
-                        <Folder />
-                    </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText
-                    primary={item.name}
-                    secondary={item.description}
-                    />
-                </ListItem>,
+    const itemsList = 
+            <List sx={{marginTop: '50px' , display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+                {data.map(item => TaskItem(item))}
             </List>
-    )})
+
 
 
     return (

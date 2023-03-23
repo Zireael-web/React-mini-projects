@@ -1,0 +1,51 @@
+
+
+{
+    "icons": [
+        {
+            "id": 0,
+            "name": "work",
+            "icon": "https://cdn-icons-png.flaticon.com/512/1243/1243560.png"
+        },
+        {
+            "id": 1,
+            "name": "wallet",
+            "icon": "https://www.svgrepo.com/show/509289/wallet.svg"
+        },
+        {
+            "id": 2,
+            "name": "bed",
+            "icon": "https://www.svgrepo.com/show/414102/rest.svg"
+        },
+        {
+            "id": 3,
+            "name": "joystick",
+            "icon": "https://www.svgrepo.com/show/384198/joystick-wireless.svg"
+        },
+        {
+            "id": 4,
+            "name": "shopping",
+            "icon": "https://www.svgrepo.com/show/60228/full-shoping-cart.svg"
+        },
+        {
+            "id": 5,
+            "name": "message",
+            "icon": "https://www.svgrepo.com/show/506254/message-square-lines.svg"
+        },
+        {
+            "id": 6,
+            "name": "gift",
+            "icon": "https://www.svgrepo.com/show/505386/gift.svg"
+        },
+        {
+            "id": 7,
+            "name": "writing down",
+            "icon": "https://www.svgrepo.com/show/412541/write.svg"
+        },
+        {
+            "id": 8,
+            "name": "airplane",
+            "icon": "https://www.svgrepo.com/show/509707/airplane.svg"
+        }
+    ]
+}
