@@ -1,7 +1,7 @@
 import { ListItem, IconButton, ListItemAvatar, Avatar, ListItemText } from '@mui/material';
-import { Delete } from '@mui/icons-material';
+import { Delete, Edit } from '@mui/icons-material';
 
-const TaskItem = (item, tags, icons, deleteTask) => {    
+const TaskItem = (item, tags, icons, deleteTask, handleOpen, setModalContent) => {    
 
     function createSecondaryText() {
         const tagData = tags.find(tag => tag.id === item.tagId)
@@ -22,7 +22,6 @@ const TaskItem = (item, tags, icons, deleteTask) => {
 
     function setAvatar() {
         const icon = icons.find(icon => icon.id === item.IconId)
-        console.log(icon)
 
         return (
             <img 
@@ -44,13 +43,31 @@ const TaskItem = (item, tags, icons, deleteTask) => {
         key={item.id}
         sx={{backgroundColor: '#e3f2fd' , border: '1px solid #747D91', height: 60, marginBottom: '10px', borderRadius: '25px'}}
         secondaryAction={
-        <IconButton 
+        <>
+        <IconButton
+            edge="end" 
+            aria-label="delete" 
+            onClick={() => {
+                handleOpen() 
+                setModalContent({
+                    id: item.id,
+                    name: item.name,
+                    description: item.description,
+                    completed: item.completed,
+                    data: item.data,
+                    IconId: item.IconId,
+                    tagId: item.tagId
+                })
+                }}>
+            <Edit />
+        </IconButton>
+        <IconButton
             edge="end" 
             aria-label="delete" 
             onClick={e => deleteElem(e, item.id)}>
-            <Delete  
-            />
+            <Delete />
         </IconButton>
+        </>
         }
         >
         <ListItemAvatar>

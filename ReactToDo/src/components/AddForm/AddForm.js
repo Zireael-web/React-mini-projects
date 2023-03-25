@@ -16,8 +16,6 @@ function AddForm({tags, icons, addTask}) {
     
     const [dateI, setDateI] = useState(0);
 
-
-
     function handleVisibility(e) {
         e.preventDefault();
         setVisibility(visibility => !visibility);
@@ -128,8 +126,8 @@ function AddForm({tags, icons, addTask}) {
                     >
                     {tags.map((item) => (
                         <MenuItem
+                        key={item.id}
                         onClick={e => handleCurTagId(e, item.id)}
-                        key={item.id} 
                         value={item.name}>
                         {item.name}
                         </MenuItem>
