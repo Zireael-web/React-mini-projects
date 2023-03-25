@@ -6,7 +6,7 @@
         "description": "And don't forget to include MUI components!",
         "completed": true,
         "data": null,
-        "pictureId": null,
+        "IconId": 0,
         "tagId": 0
     },
     {
@@ -15,7 +15,7 @@
         "description": "Lorem ipsum and so on...",
         "completed": false,
         "data": null,
-        "pictureId": null,
+        "IconId": 4,
         "tagId": 1
     },
     {
@@ -24,7 +24,7 @@
         "description": null,
         "completed": false,
         "data": null,
-        "pictureId": null,
+        "IconId": 3,
         "tagId": 2
     }
 ]

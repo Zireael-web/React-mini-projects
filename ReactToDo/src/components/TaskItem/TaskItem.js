@@ -1,28 +1,66 @@
-import { ListItem, IconButton, ListItemAvatar, Avatar, ListItemText  } from '@mui/material';
-import { Folder, Delete } from '@mui/icons-material';
+import { ListItem, IconButton, ListItemAvatar, Avatar, ListItemText } from '@mui/material';
+import { Delete } from '@mui/icons-material';
 
-const TaskItem = (item) => {    
+const TaskItem = (item, tags, icons, deleteTask) => {    
+
+    function createSecondaryText() {
+        const tagData = tags.find(tag => tag.id === item.tagId)
+        
+        return (
+            <>
+                <span
+                    style={{display: 'inline-block', color: tagData.color, marginRight: '10px', width: '115px'}}
+                >
+                    {tagData.name}
+                </span>
+                <span>
+                    {item.description}
+                </span>
+            </>
+        )
+    }
+
+    function setAvatar() {
+        const icon = icons.find(icon => icon.id === item.IconId)
+        console.log(icon)
+
+        return (
+            <img 
+                style={{width: '22px', height: '22px'}}
+                src={icon.icon}
+                alt='icon'
+            />
+        )
+    }
+
+    function deleteElem(e, id) {
+        e.preventDefault();
+
+        deleteTask(id)
+    }
 
     return (
     <ListItem
         key={item.id}
         sx={{backgroundColor: '#e3f2fd' , border: '1px solid #747D91', height: 60, marginBottom: '10px', borderRadius: '25px'}}
         secondaryAction={
-        <IconButton edge="end" aria-label="delete">
-            <Delete 
+        <IconButton 
+            edge="end" 
+            aria-label="delete" 
+            onClick={e => deleteElem(e, item.id)}>
+            <Delete  
             />
         </IconButton>
         }
         >
         <ListItemAvatar>
         <Avatar>
-            <Folder
-             />
+            {setAvatar()}
         </Avatar>
         </ListItemAvatar>
         <ListItemText
         primary={item.name}
-        secondary={(item.description) ? 'Task with description' : null}
+        secondary={createSecondaryText()}
         />
     </ListItem>
     )

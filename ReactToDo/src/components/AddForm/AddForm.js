@@ -1,24 +1,37 @@
 import { useState } from "react";
 
-import { TextField, Button, Divider, MenuItem, IconButton, Box} from "@mui/material";
+import { TextField, Button, MenuItem, IconButton} from "@mui/material";
 
 import { Check } from "@mui/icons-material";
 
-function AddForm({tags, icons}) {
-    console.log('render')
+function AddForm({tags, icons, addTask}) {
     const [name, setName] = useState('');
     const [tag, setTag] = useState('');
-    const [curIcon, setСurIcon] = useState(findIconById);
-    const [visibility, setVisibility] = useState(false);
 
-    function handleVisibility(e, visibility) {
+    const [curTagId, setCurTagId] = useState(null);
+    const [curIcon, setСurIcon] = useState(findIconById);
+    const [curIconId, setCurIconId] = useState(0)
+
+    const [visibility, setVisibility] = useState(false);
+    
+    const [dateI, setDateI] = useState(0);
+
+
+
+    function handleVisibility(e) {
         e.preventDefault();
         setVisibility(visibility => !visibility);
     }
 
-    function handleCurIcon(e, item) {
+    function handleCurData(e, item) {
         e.preventDefault();
         setСurIcon(findIconById(item.id))
+        setCurIconId(item.id)
+    }
+
+    function handleCurTagId(e, id) {
+        e.preventDefault();
+        setCurTagId(id);
     }
 
     function findIconById(id = 0) {
@@ -27,12 +40,32 @@ function AddForm({tags, icons}) {
         return item;
     }
 
-    
+    function gatherInfo(e) {
+        e.preventDefault();
+
+        setDateI(dateI => dateI + 1)
+
+        let newTask ={
+            id: Date.parse(new Date()) + dateI,
+            name,
+            description: '',
+            completed: false,
+            data: null,
+            IconId: curIconId,
+            tagId: curTagId
+        }
+
+        setName('')
+        setTag('')
+
+        addTask(newTask)
+    }
+
     return (    
         <form 
         style={{padding: '10px', border: '1px solid #747D91', borderRadius: '10px', position: 'relative'}}>
             <div 
-            class="upper"
+            className="upper"
             style={{ display: 'flex', alignItems: 'flex-end' }}>
                 <IconButton
                     onClick={handleVisibility}
@@ -56,7 +89,7 @@ function AddForm({tags, icons}) {
                 />
             </div>
             <div 
-            class="icons-popup"
+            className="icons-popup"
             style={{visibility: `${(visibility) ? 'visible' : 'hidden'}`, width: '100px', height: '100px', display: 'flex', flexWrap: 'wrap', position: 'absolute', top: '-100px', left: '-100px'}}
             >
                 {icons.map(item => {
@@ -65,7 +98,8 @@ function AddForm({tags, icons}) {
                         style={{border: 'none', background: 'none'}}
                         onClick={
                             e => {
-                                handleCurIcon(e, item)
+                                handleCurData(e, item)
+
                                 handleVisibility(e);
                         }}
                         >
@@ -79,7 +113,7 @@ function AddForm({tags, icons}) {
                 })}
             </div>  
             <div 
-            class="bottom"
+            className="bottom"
             style={{display: 'flex', marginTop: '30px', alignItems: 'flex-end'}}
             >
                 <TextField
@@ -93,12 +127,16 @@ function AddForm({tags, icons}) {
                     label="Tag"
                     >
                     {tags.map((item) => (
-                        <MenuItem key={item.id} value={item.name}>
+                        <MenuItem
+                        onClick={e => handleCurTagId(e, item.id)}
+                        key={item.id} 
+                        value={item.name}>
                         {item.name}
                         </MenuItem>
                     ))}
                 </TextField>
                 <Button
+                    onClick={e => gatherInfo(e)}
                     type="submit"
                     sx={{ml: '10px'}} 
                     variant="contained"

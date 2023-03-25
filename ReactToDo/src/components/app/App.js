@@ -13,14 +13,33 @@ import './App.css';
 
 
 const App = () => {
+    console.log('render')
     const [data, setData] = useState(taskDB.data);
     const [tags, setTags] = useState(tagsDB.tags);
-    const [icons, setIcons] = useState(iconsDB.icons);
+    const [icons, setIcons] = useState(iconsDB.icons)
+
+    function addTask(item) {
+        setData(data => [...data, item])
+    }
+
+    function deleteTask(id) {
+        setData(data.filter(item => item.id !== id))
+    }
 
     return (
         <Container sx={{width: '920px'}}>
-            <AddForm  tags={tags} icons={icons}/>
-            <TaskList data={data}/>
+            <AddForm  
+                tags={tags}
+                icons={icons}
+                addTask={item => addTask(item)}
+            />
+            <TaskList 
+                data={data} 
+                tags={tags} 
+                icons={icons}
+                deleteTask={id => deleteTask(id)}
+                />
+            
         </Container>
     );
 }
