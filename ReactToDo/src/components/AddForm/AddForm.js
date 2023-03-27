@@ -8,7 +8,7 @@ function AddForm({tags, icons, addTask}) {
     const [name, setName] = useState('');
     const [tag, setTag] = useState('');
 
-    const [curTagId, setCurTagId] = useState(null);
+    const [curTagId, setCurTagId] = useState();
     const [curIcon, setСurIcon] = useState(findIconById);
     const [curIconId, setCurIconId] = useState(0)
 
@@ -48,13 +48,15 @@ function AddForm({tags, icons, addTask}) {
             name,
             description: '',
             completed: false,
-            data: null,
+            date: null,
             IconId: curIconId,
             tagId: curTagId
         }
 
         setName('')
-        setTag('')
+        setTag()
+        setCurTagId()
+        
 
         addTask(newTask)
     }
@@ -88,11 +90,12 @@ function AddForm({tags, icons, addTask}) {
             </div>
             <div 
             className="icons-popup"
-            style={{visibility: `${(visibility) ? 'visible' : 'hidden'}`, width: '100px', height: '100px', display: 'flex', flexWrap: 'wrap', position: 'absolute', top: '-100px', left: '-100px'}}
+            style={{visibility: `${(visibility) ? 'visible' : 'hidden'}`, justifyContent: 'space-between', flexWrap: 'wrap', padding: '5px 10px', width: '125px', display: 'flex', position: 'absolute', top: '0px', left: '-145px', border: '2px solid #000', boxShadow: 24, opacity: `${visibility ? 1 : 0}`, transition: 'all 0.15s'}}
             >
                 {icons.map(item => {
                     return (
                         <button
+                        className="hover-pointer"
                         style={{border: 'none', background: 'none'}}
                         onClick={
                             e => {

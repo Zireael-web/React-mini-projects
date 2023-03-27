@@ -14,18 +14,29 @@ import './App.css';
 
 
 const App = () => {
-    console.log('render')
     const [data, setData] = useState(taskDB.data);
     const [tags, setTags] = useState(tagsDB.tags);
     const [icons, setIcons] = useState(iconsDB.icons)
 
-    const [modalOpen, setModalOpen] = useState(true);
-    const [modalContent, setModalContent] = useState(null);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [modalContent, setModalContent] = useState({});
     const handleOpen = () => setModalOpen(true);
-    const handleClose = () => setModalOpen(false);
+    const handleClose = (func) => {
+        func();
+        setModalOpen(false);
+    }
 
     function addTask(item) {
         setData(data => [...data, item])
+    }
+
+    function changeTask(newItem) {
+        const index = data.findIndex(item => item.id === newItem.id)
+
+        const newData = [...data];
+        newData[index] = newItem;
+
+        setData(newData);
     }
 
     function deleteTask(id) {
@@ -55,6 +66,7 @@ const App = () => {
                 open={modalOpen}
                 handleClose={handleClose}
                 modalContent={modalContent}
+                changeTask={item => changeTask(item)}
             />
         </Container>
     );
