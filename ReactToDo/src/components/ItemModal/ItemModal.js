@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Modal, Box, Button, Stack, TextField, IconButton, MenuItem } from '@mui/material'
 import React from 'react'
@@ -54,8 +54,6 @@ function ItemModal({tags, icons, open, handleClose, modalContent, changeTask}) {
         setVisibility(visibility => !visibility);
     }
 
-
-
     function handleIconByLink(link) {
         setCurIcon(link)  
     }
@@ -68,7 +66,6 @@ function ItemModal({tags, icons, open, handleClose, modalContent, changeTask}) {
 
     function handleCurIconId(id) {
         setCurIconId(id)
-        console.log(curIconId)
     }
 
     function handleTagById(id) {
@@ -79,10 +76,7 @@ function ItemModal({tags, icons, open, handleClose, modalContent, changeTask}) {
 
     function handleCurTagId(id) {
         setCurTagId(id)
-        console.log(curTagId)
     }
-
-
 
     function changeInfo() {
 
@@ -107,7 +101,7 @@ function ItemModal({tags, icons, open, handleClose, modalContent, changeTask}) {
         setDate('')
         setCurIcon('')
         setCurTag('')
-
+        setVisibility(false)
     }
 
   return (      
@@ -118,6 +112,7 @@ function ItemModal({tags, icons, open, handleClose, modalContent, changeTask}) {
         aria-describedby="modal-modal-description"
     >
         <Box sx={style}>
+            
             <Box 
                 className="upper"
                 sx={{ display: 'flex', alignItems: 'flex-end' }}
@@ -138,12 +133,12 @@ function ItemModal({tags, icons, open, handleClose, modalContent, changeTask}) {
                     value={name}
                     sx={{width: '100%'}}
                     id="name"
-                    name="name" 
+                    name="name"
                     label="Enter Task Name" 
                     variant="standard"
                 />
             </Box>
-
+ 
             <Box 
                 sx={{position: 'relative'}}
             >
@@ -200,7 +195,7 @@ function ItemModal({tags, icons, open, handleClose, modalContent, changeTask}) {
                     >
                     {tags.map((item) => (
                         <MenuItem
-                        onClick={(e) => 
+                        onClick={() => 
                             handleCurTagId(item.id)}
                         key={item.id}
                         value={item.name}

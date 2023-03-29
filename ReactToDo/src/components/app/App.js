@@ -16,13 +16,15 @@ import './App.css';
 const App = () => {
     const [data, setData] = useState(taskDB.data);
     const [tags, setTags] = useState(tagsDB.tags);
-    const [icons, setIcons] = useState(iconsDB.icons)
+    const [icons, setIcons] = useState(iconsDB.icons);
+
+    const [tagFilter, setTagFilter] = useState(false);
 
     const [modalOpen, setModalOpen] = useState(false);
     const [modalContent, setModalContent] = useState({});
     const handleOpen = () => setModalOpen(true);
-    const handleClose = (func) => {
-        func();
+    const handleClose = (clearModal) => {
+        clearModal();
         setModalOpen(false);
     }
 
@@ -43,6 +45,10 @@ const App = () => {
         setData(data.filter(item => item.id !== id))
     }
 
+    function handleTagFilter(filter) {
+        setTagFilter(filter)
+    }
+
     return (
         <Container sx={{width: '920px'}}>
             <AddForm  
@@ -50,7 +56,9 @@ const App = () => {
                 icons={icons}
                 addTask={item => addTask(item)}
             />
-            <TaskList 
+            <TaskList
+                tagFilter={tagFilter}
+                handleTagFilter={filter => handleTagFilter(filter)} 
                 data={data} 
                 tags={tags} 
                 icons={icons}
