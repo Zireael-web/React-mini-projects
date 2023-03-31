@@ -3,8 +3,6 @@ import { Delete, Edit } from '@mui/icons-material';
 
 const TaskItem = (item, tags, icons, deleteTask, handleOpen, setModalContent) => {      
 
-    /* const newName = (item.name && item.name.length > 70) ? item.name = item.name.slice(0, 70) + '...' : null; */
-
     function createSecondaryText() {
         const newDescription = (item.description && item.description.length > 90) ? item.description.slice(0, 90) + '...' : item.description;
         

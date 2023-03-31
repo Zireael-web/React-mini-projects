@@ -33,6 +33,9 @@ function ItemModal({tags, icons, open, handleClose, modalContent, changeTask}) {
     const [curTagId, setCurTagId] = useState();
     
     const [visibility, setVisibility] = useState(false);
+    
+    const [errorInput, setErrorInput] = useState(false);
+    const [helperText, setHelperText] = useState(false);
 
     useEffect(() => {
         setId(modalContent.id)
@@ -47,6 +50,8 @@ function ItemModal({tags, icons, open, handleClose, modalContent, changeTask}) {
         setCurTag(handleTagById(modalContent.tagId))
         setCurTagId(modalContent.tagId)
 
+
+        // eslint-disable-next-line
     }, [modalContent])
 
     function handleVisibility(e) {
@@ -78,7 +83,17 @@ function ItemModal({tags, icons, open, handleClose, modalContent, changeTask}) {
         setCurTagId(id)
     }
 
+    function onInputChange(e) {
+        setHelperText(false);
+        (e.target.value.length > 0) ? setErrorInput(false) : setErrorInput(true);
+    }
+
     function changeInfo() {
+        if (errorInput) {
+            setHelperText(true)
+            return
+        };
+
 
         let newTask ={
             id,
@@ -91,6 +106,8 @@ function ItemModal({tags, icons, open, handleClose, modalContent, changeTask}) {
         }
 
         changeTask(newTask)
+
+        handleClose(clearModal);
     }
 
     const clearModal = () => {
@@ -102,6 +119,9 @@ function ItemModal({tags, icons, open, handleClose, modalContent, changeTask}) {
         setCurIcon('')
         setCurTag('')
         setVisibility(false)
+
+        setErrorInput(false)
+        setHelperText(false)
     }
 
   return (      
@@ -129,7 +149,11 @@ function ItemModal({tags, icons, open, handleClose, modalContent, changeTask}) {
                     </img>
                 </IconButton>
                 <TextField
-                    onChange={(e) => {setName(e.target.value)}}
+                    error={errorInput}
+                    onChange={(e) => {
+                        onInputChange(e)
+                        setName(e.target.value)
+                    }}
                     value={name}
                     sx={{width: '100%'}}
                     id="name"
@@ -138,6 +162,12 @@ function ItemModal({tags, icons, open, handleClose, modalContent, changeTask}) {
                     variant="standard"
                 />
             </Box>
+
+            <div
+                style={{color: '#d32f2f', margin: '7px 0px 0px 36px', opacity: `${helperText ? 1 : 0}`, transition: 'all 0.3s', visibility: `${helperText ? 'visible' : 'hidden'}`}}
+            >
+                Please, set the task name
+            </div>
  
             <Box 
                 sx={{position: 'relative'}}
@@ -172,7 +202,7 @@ function ItemModal({tags, icons, open, handleClose, modalContent, changeTask}) {
             <TextField    
                 multiline
                 maxRows={4}
-                sx={{width: '100%', mt: '20px'}}
+                sx={{width: '100%', mt: '8px'}}
                 id="name"
                 name="name" 
                 value={description}
@@ -222,7 +252,7 @@ function ItemModal({tags, icons, open, handleClose, modalContent, changeTask}) {
                 <Button 
                     onClick={() => {
                         changeInfo();
-                        handleClose(clearModal);
+                        
                     }}
                     color="success" 
                     variant="contained"

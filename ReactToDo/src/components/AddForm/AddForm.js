@@ -171,7 +171,7 @@ function AddForm({tags, icons, addTask}) {
 
             <div 
             className="bottom"
-            style={{display: 'flex', marginTop: '20px', alignItems: 'flex-end'}}
+            style={{display: 'flex', marginTop: '15px', alignItems: 'flex-end'}}
             >
                 <TextField
                     onChange={(e) => {

@@ -1,4 +1,5 @@
-import { Grid, List, TextField, MenuItem } from '@mui/material';
+import { Grid, List} from '@mui/material';
+import SortingMenu from '../SortingMenu/SortingMenu';
 
 import TaskItem from '../TaskItem/TaskItem';
 
@@ -9,42 +10,10 @@ const TaskList = (props) => {
     return (
         <Grid item xs={12}>
             <Grid>
-            <TextField
-                /* error={errorInput} */
-                /* onChange={(e) => {
-                    validateInput(e)
-                    setName(e.target.value)
-                }} */
-                value={'name'}
-                sx={{width: '100%'}}
-                id="name"
-                name="name" 
-                label="Enter Task Name" 
-                variant="standard"
-                />
-            <TextField
-                    /* onChange={(e) => {
-                        validateError(e)
-                        setTag(e.target.value)
-                    }} */
-                    value={''}
-                    size="small"
-                    sx={{width: '150px'}}
-                    id="tag"
-                    name="tag"
-                    /* error={errorSelect} */
-                    select
-                    label="Tag"
-                    >
-                    {props.tags.map((item) => (
-                        <MenuItem
-                        key={item.id}
-                        /* onClick={e => handleCurTagId(e, item.id)} */
-                        value={item.name}>
-                        {item.name}
-                        </MenuItem>
-                    ))}
-            </TextField>
+            <SortingMenu
+                sx={{mt: '45px'}}
+                tags={props.tags}
+            />
             </Grid>
             {content}
         </Grid>
