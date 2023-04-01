@@ -1,9 +1,17 @@
 import { TextField, Grid, Box, Typography, Autocomplete } from "@mui/material"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-const SortingMenu = ({tags, sx}) => {
+const SortingMenu = ({tags, sx, handleCurTag, handleCurName}) => {
     const [searchName, setSearchName] = useState('');
     const [searchTag, setSearchTag] = useState('');
+
+    useEffect(() => {
+        handleCurTag(searchTag)
+    }, [searchTag])
+
+    useEffect(() => {
+        handleCurName(searchName)
+    }, [searchName])
 
     function handleSearchName(e) {
         setSearchName(e.target.value)
@@ -52,6 +60,7 @@ const SortingMenu = ({tags, sx}) => {
                         size="small"
                         onChange={(e) => {
                             handleSearchTag(e)
+                            handleCurTag(searchTag)
                         }}
                         options={tags.map((item) => {
                             return item.name
@@ -59,29 +68,6 @@ const SortingMenu = ({tags, sx}) => {
                         renderInput={(params) => 
                         <TextField {...params}  label="Sort by tag" />}
                     />
-                    {/* <TextField
-                            onChange={(e) => {
-                                validateError(e)
-                                setTag(e.target.value)
-                            }}
-                            value={''}
-                            size="small"
-                            sx={{width: '150px'}}
-                            id="tag"
-                            name="tag"
-                            error={errorSelect}
-                            select
-                            label="Seach by tag"
-                            >
-                            {tags.map((item) => (
-                                <MenuItem
-                                key={item.id}
-                                a
-                                value={item.name}>
-                                {item.name}
-                                </MenuItem>
-                            ))}
-                    </TextField> */}
                 </Grid>
             </Grid>
         </Box>
