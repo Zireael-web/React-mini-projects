@@ -18,7 +18,7 @@ const style = {
     flexDirection: 'column'
 }
 
-function ItemModal({tags, icons, open, handleClose, modalContent, changeTask}) {
+function ItemModal({tags, icons, open, handleClose, modalContent, changeTask, handleSnackOpen}) {
 
     const [id, setId] = useState();
     const [name, setName] = useState();
@@ -49,7 +49,6 @@ function ItemModal({tags, icons, open, handleClose, modalContent, changeTask}) {
         
         setCurTag(handleTagById(modalContent.tagId))
         setCurTagId(modalContent.tagId)
-
 
         // eslint-disable-next-line
     }, [modalContent])
@@ -108,6 +107,7 @@ function ItemModal({tags, icons, open, handleClose, modalContent, changeTask}) {
         changeTask(newTask)
 
         handleClose(clearModal);
+        handleSnackOpen('edit')
     }
 
     const clearModal = () => {
@@ -214,8 +214,8 @@ function ItemModal({tags, icons, open, handleClose, modalContent, changeTask}) {
             />
 
             <TextField
-                    onChange={(e) => {setCurTag(e.target.value)}}
                     value={curTag}
+                    onChange={(e) => {setCurTag(e.target.value)}}
                     size="small"
                     sx={{width: '150px', mt: '25px'}}
                     id="tag"

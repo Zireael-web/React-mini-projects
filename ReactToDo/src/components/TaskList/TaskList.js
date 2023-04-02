@@ -69,13 +69,13 @@ const NoView = () => {
     </div>)              
 }
 
-const View = ({tags, icons, deleteTask, handleOpen, setModalContent, sortedData}) => {
+const View = ({tags, icons, deleteTask, handleOpen, setModalContent, sortedData, handleSnackOpen}) => {
 
     return (
         (sortedData.length > 0) 
         ?
         <List sx={{marginTop: '50px' , display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-            {sortedData.map(item => TaskItem(item, tags, icons, deleteTask, handleOpen, setModalContent))}
+            {sortedData.map(item => TaskItem(item, tags, icons, deleteTask, handleOpen, setModalContent, handleSnackOpen))}
         </List>
         :
         <div

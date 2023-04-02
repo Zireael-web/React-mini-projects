@@ -4,7 +4,7 @@ import { TextField, Button, MenuItem, IconButton} from "@mui/material";
 
 import { Check,} from "@mui/icons-material";
 
-function AddForm({tags, icons, addTask}) {
+function AddForm({tags, icons, addTask, handleSnackOpen}) {
     const [name, setName] = useState('');
     const [tag, setTag] = useState('');
 
@@ -103,6 +103,7 @@ function AddForm({tags, icons, addTask}) {
         
 
         addTask(newTask)
+        handleSnackOpen('add')
     }
 
     return (    
